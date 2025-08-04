@@ -9,33 +9,13 @@ signal_hook::save_stack_trace::hd000740b9c42a477
   at /home/yang/worksapce/signal_hook/src/main.rs:20
 signal_hook::signal_listener::he5ec4bac48707aaf
   at /home/yang/worksapce/signal_hook/src/main.rs:63
-core::ops::function::FnOnce::call_once::h9cd588cf877e52f1
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250
-std::sys::backtrace::__rust_begin_short_backtrace::h551c2f1830ed2ef2
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/sys/backtrace.rs:152
-std::thread::Builder::spawn_unchecked_::{{closure}}::{{closure}}::h8aeb3af575a8748e
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/mod.rs:559
-<core::panic::unwind_safe::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h7753f23c068a4636
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/unwind_safe.rs:272
-std::panicking::try::do_call::hca5b2fa3eecd497b
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:589
-"__rust_try"
-std::panicking::try::hbecd8f6e80e82bcf
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:552
-std::panic::catch_unwind::h0160ea1f77a29b3a
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panic.rs:359
-std::thread::Builder::spawn_unchecked_::{{closure}}::h695ab7ae444ffa6a
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/mod.rs:557
-core::ops::function::FnOnce::call_once{{vtable.shim}}::hc3546ef257dd9ba6
-  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250
-<alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h39d74687ec0bb8b1
-  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/alloc/src/boxed.rs:1966
-<alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h7fceaa626ae349ea
-  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/alloc/src/boxed.rs:1966
-std::sys::pal::unix::thread::Thread::new::thread_start::h8985427f793e6fe1
-  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/sys/pal/unix/thread.rs:97
-"start_thread"
-  at ./nptl/pthread_create.c:447
-"clone3"
-  at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
+signal_hook::init_signal_handler::h7c8b1f9c64bd66d8
+  at /home/yang/worksapce/signal_hook/src/main.rs:76
+signal_hook::init_signal_handler::f::f::hc4fe56690e086304
+  at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctor-0.4.3/src/macros/mod.rs:288
+"call_init"
+  at ./csu/../csu/libc-start.c:145
+"__libc_start_main_impl"
+  at ./csu/../csu/libc-start.c:347
+"_start"
 
