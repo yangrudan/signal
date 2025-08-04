@@ -71,7 +71,7 @@ fn signal_listener() {
     // save_checkpoint();
 
     // 退出进程（确保训练进程终止）
-    thread::sleep(Duration::from_secs(10));
+    thread::sleep(Duration::from_secs(2));
     eprintln!("训练进程已终止，堆栈信息maybe已保存。");
     std::process::exit(1);
 }
