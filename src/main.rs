@@ -73,7 +73,9 @@ fn signal_listener() {
 #[ctor]
 fn init_signal_handler() {
     // 启动信号监听线程（与训练主线程分离）
-    signal_listener();
+    thread::spawn(|| {
+        signal_listener();
+    });
     eprintln!("信号监听已启动，将在异常时保存堆栈信息");
 }
 

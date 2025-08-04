@@ -1,21 +1,41 @@
 Model training crashed. Stack trace:
-backtrace::backtrace::libunwind::trace::hdca875300fd9ae75
+backtrace::backtrace::libunwind::trace::ha44c950d9eaafc65
   at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/libunwind.rs:117
-backtrace::backtrace::trace_unsynchronized::h04bd57f159520f06
+backtrace::backtrace::trace_unsynchronized::h2310170323c6c84c
   at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/mod.rs:66
-backtrace::backtrace::trace::hc6bd4fcb554f0677
+backtrace::backtrace::trace::h52512888c76ef28c
   at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/mod.rs:53
-signal_hook::save_stack_trace::hd000740b9c42a477
+signal_hook::save_stack_trace::h1e6d213ae074f394
   at /home/yang/worksapce/signal_hook/src/main.rs:20
-signal_hook::signal_listener::he5ec4bac48707aaf
+signal_hook::signal_listener::h0279c3a644ae704c
   at /home/yang/worksapce/signal_hook/src/main.rs:63
-signal_hook::init_signal_handler::h7c8b1f9c64bd66d8
-  at /home/yang/worksapce/signal_hook/src/main.rs:76
-signal_hook::init_signal_handler::f::f::hc4fe56690e086304
-  at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ctor-0.4.3/src/macros/mod.rs:288
-"call_init"
-  at ./csu/../csu/libc-start.c:145
-"__libc_start_main_impl"
-  at ./csu/../csu/libc-start.c:347
-"_start"
+signal_hook::init_signal_handler::{{closure}}::hc73a3131a5623c3b
+  at /home/yang/worksapce/signal_hook/src/main.rs:77
+std::sys::backtrace::__rust_begin_short_backtrace::h1cd26c04f2f9c908
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/sys/backtrace.rs:152
+std::thread::Builder::spawn_unchecked_::{{closure}}::{{closure}}::h10f4175a0fa00d97
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/mod.rs:559
+<core::panic::unwind_safe::AssertUnwindSafe<F> as core::ops::function::FnOnce<()>>::call_once::h26f1cdc9c81129ce
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/panic/unwind_safe.rs:272
+std::panicking::try::do_call::h312909d86afb2feb
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:589
+"__rust_try"
+std::panicking::try::hdde790d679010f1c
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panicking.rs:552
+std::panic::catch_unwind::hb592b483fe0c86f5
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/panic.rs:359
+std::thread::Builder::spawn_unchecked_::{{closure}}::h48da81eb91b71da8
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/thread/mod.rs:557
+core::ops::function::FnOnce::call_once{{vtable.shim}}::hfe630ebc88c01745
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250
+<alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h39d74687ec0bb8b1
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/alloc/src/boxed.rs:1966
+<alloc::boxed::Box<F,A> as core::ops::function::FnOnce<Args>>::call_once::h7fceaa626ae349ea
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/alloc/src/boxed.rs:1966
+std::sys::pal::unix::thread::Thread::new::thread_start::h8985427f793e6fe1
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/sys/pal/unix/thread.rs:97
+"start_thread"
+  at ./nptl/pthread_create.c:447
+"clone3"
+  at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:78
 
