@@ -1,0 +1,44 @@
+Stack trace:
+backtrace::backtrace::libunwind::trace::hdca875300fd9ae75
+  at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/libunwind.rs:117
+backtrace::backtrace::trace_unsynchronized::ha12f171f7bc46757
+  at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/mod.rs:66
+backtrace::backtrace::trace::h2003197fd4c30ac3
+  at /home/yang/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/backtrace-0.3.75/src/backtrace/mod.rs:53
+signal_hook::save_stack_trace::h831bf4ab3de4c72b
+  at /home/yang/worksapce/signal_hook/src/main.rs:13
+signal_hook::main::h671772244bff8e1f
+  at /home/yang/worksapce/signal_hook/src/main.rs:51
+core::ops::function::FnOnce::call_once::hc29301f7e8e69ff1
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/core/src/ops/function.rs:250
+std::sys::backtrace::__rust_begin_short_backtrace::hec0e0826374fbf24
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/sys/backtrace.rs:152
+std::rt::lang_start::{{closure}}::hed8ab01d81b135b9
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/rt.rs:199
+core::ops::function::impls::<impl core::ops::function::FnOnce<A> for &F>::call_once::hec23e18ad0bad91b
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/core/src/ops/function.rs:284
+std::panicking::try::do_call::h6523b683ca12a897
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panicking.rs:589
+std::panicking::try::h41b59a5357b55ee6
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panicking.rs:552
+std::panic::catch_unwind::had1644512cf37100
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panic.rs:359
+std::rt::lang_start_internal::{{closure}}::h1d86126ad090a26c
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/rt.rs:168
+std::panicking::try::do_call::ha23efbd63c4eb828
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panicking.rs:589
+std::panicking::try::h21f15f7125ed5ba9
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panicking.rs:552
+std::panic::catch_unwind::h327aa9f78df33127
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/panic.rs:359
+std::rt::lang_start_internal::hf89aee87e52c94e8
+  at /rustc/50aa04180709189a03dde5fd1c05751b2625ed37/library/std/src/rt.rs:164
+std::rt::lang_start::hace6b494c7d3b9eb
+  at /home/yang/.rustup/toolchains/nightly-2025-05-09-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/library/std/src/rt.rs:198
+"main"
+"__libc_start_call_main"
+  at ./csu/../sysdeps/nptl/libc_start_call_main.h:58
+"__libc_start_main_impl"
+  at ./csu/../csu/libc-start.c:360
+"_start"
+
