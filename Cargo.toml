@@ -6,3 +6,5 @@ edition = "2024"
 [dependencies]
 signal-hook = "0.3.18"
 backtrace = "0.3.67"
+ctor = "0.4.3"
+lazy_static = "1.4"

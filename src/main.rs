@@ -1,15 +1,22 @@
+use ctor::ctor;
+use lazy_static::lazy_static;
 use std::fs::File;
-use std::io::Write;
+use std::io::{Error, Write};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::io::Error;
+use std::thread;
+use std::time::Duration;
 
-// 保存堆栈到文件
+// 全局原子变量，用于跨线程传递信号状态
+lazy_static! {
+    static ref TERM_FLAG: Arc<AtomicBool> = Arc::new(AtomicBool::new(false));
+}
+
+// 堆栈保存函数：在正常执行流中调用，安全执行复杂操作
 fn save_stack_trace() -> Result<(), Error> {
-    let mut file = File::create("stack_trace.txt")?;
+    let mut file = File::create("train_stack_trace.txt")?;
     let mut backtrace = String::new();
-    
-    // 使用 backtrace 库捕获堆栈信息
+
     backtrace::trace(|frame| {
         backtrace::resolve_frame(frame, |symbol| {
             if let Some(name) = symbol.name() {
@@ -23,34 +30,64 @@ fn save_stack_trace() -> Result<(), Error> {
         });
         true // 继续捕获所有帧
     });
-    
-    writeln!(file, "Stack trace:\n{}", backtrace)?;
-    println!("堆栈已保存到 stack_trace.txt");
+
+    writeln!(file, "Model training crashed. Stack trace:\n{}", backtrace)?;
+    eprintln!("堆栈信息已保存到 train_stack_trace.txt");
     Ok(())
 }
 
-fn main() -> Result<(), Error> {
-    // 1. 创建原子变量标记信号
-    let term_flag = Arc::new(AtomicBool::new(false));
-    
-    // 2. 注册需要监听的异常退出信号（SIGTERM、SIGINT、SIGSEGV 等）
-    signal_hook::flag::register(signal_hook::consts::SIGTERM, Arc::clone(&term_flag))?;
-    signal_hook::flag::register(signal_hook::consts::SIGINT, Arc::clone(&term_flag))?;
-    // 注意：SIGSEGV（段错误）等致命信号可能无法被正常捕获，需特殊处理
-    
-    println!("程序运行中，按 Ctrl+C 或发送 SIGTERM 测试堆栈保存...");
-    
-    // 3. 主循环：轮询信号状态，正常流程中处理堆栈保存
-    while !term_flag.load(Ordering::Relaxed) {
-        // 模拟业务逻辑
-        std::thread::sleep(std::time::Duration::from_secs(1));
+// 信号监听线程：低消耗轮询
+fn signal_listener() {
+    // 注册需要监听的异常信号（根据训练需求调整）
+    let signals = [
+        signal_hook::consts::SIGTERM, // kill 命令
+        signal_hook::consts::SIGINT,  // Ctrl+C
+        signal_hook::consts::SIGABRT, // 程序异常终止
+    ];
+
+    // 为每个信号注册处理（设置TERM_FLAG为true）
+    let registrations: Vec<_> = signals
+        .iter()
+        .map(|&sig| {
+            signal_hook::flag::register(sig, Arc::clone(&TERM_FLAG))
+                .expect("Failed to register signal")
+        })
+        .collect();
+
+    // 低消耗轮询：每次检查后休眠100ms，平衡响应速度和资源消耗
+    while !TERM_FLAG.load(Ordering::Relaxed) {
+        thread::sleep(Duration::from_millis(100));
     }
-    
-    // 4. 收到信号后，在正常执行流中保存堆栈
-    println!("收到退出信号，准备保存堆栈...");
-    save_stack_trace()?;
-    
-    // 其他清理操作...
-    println!("程序已优雅退出");
-    Ok(())
+
+    // 收到信号后保存堆栈（在正常线程中执行，安全可靠）
+    let _ = save_stack_trace();
+
+    // 可选：执行其他清理操作（如保存模型中间状态）
+    // save_checkpoint();
+
+    // 退出进程（确保训练进程终止）
+    std::process::exit(1);
 }
+
+// 程序启动时自动执行（通过ctor宏）
+#[ctor]
+fn init_signal_handler() {
+    // 启动信号监听线程（与训练主线程分离）
+    thread::spawn(signal_listener);
+    eprintln!("信号监听已启动，将在异常时保存堆栈信息");
+}
+
+
+fn main() {
+    // 模拟训练过程（实际训练逻辑替换为具体实现）
+    eprintln!("开始模型训练...");
+
+    // 模拟长时间运行的训练任务
+    for i in 0..100 {
+        thread::sleep(Duration::from_secs(1));
+        println!("训练进度：{}%", i + 1);
+    }
+
+    eprintln!("模型训练完成");
+}
+    
