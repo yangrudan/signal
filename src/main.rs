@@ -15,6 +15,13 @@ lazy_static! {
 
 // 堆栈保存函数：在正常执行流中调用，安全执行复杂操作
 fn save_stack_trace() -> () {
+    let pid = nix::unistd::getpid().as_raw(); // PID of the current process (thread group ID)
+    let tid = pid;
+    
+    println!("save_stack_trace Pid: {}, TID: {}", pid, tid);
+    let tid = thread::current().id();
+    println!("save线程ID (TID): {:?}", tid);
+
     let mut file = File::create("train_stack_trace.txt").unwrap();
     let mut backtrace = String::new();
 
@@ -61,7 +68,10 @@ fn signal_listener() {
     
     let pid = nix::unistd::getpid().as_raw(); // PID of the current process (thread group ID)
     let tid = pid;
+    println!("signal listening Pid: {}", pid);
     let ret = unsafe { libc::syscall(libc::SYS_tgkill, pid, tid, libc::SIGUSR2) };
+    let tid = thread::current().id();
+    println!("listening 线程ID (TID): {:?}", tid);
     println!("Received termination signal, saving stack trace...");
 
     // 下面拿到的 当前线程（信号处理线程） 的堆栈，而非执行 main() 函数的主线程。
@@ -112,6 +122,10 @@ fn setup() {
 fn main() {
     // 模拟训练过程（实际训练逻辑替换为具体实现）
     eprintln!("开始模型训练...");
+    let pid = nix::unistd::getpid().as_raw(); // PID of the current process (thread group ID)
+    println!("main Pid: {} ", pid);
+    let tid = thread::current().id();
+    println!("main线程ID (TID): {:?}", tid);
 
     // 模拟长时间运行的训练任务
     for i in 0..100 {
